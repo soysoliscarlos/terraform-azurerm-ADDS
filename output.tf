@@ -1,4 +1,5 @@
-output "DC-Public-IP" {
-  value = azurerm_public_ip.DC-Public-IP.ip_address
-}
+
+# output "DC-Public-IP" {
+#  value = azurerm_public_ip.DC-Public-IP.ip_address
+#}
 
