@@ -8,7 +8,7 @@ variable "admin_username" {
 }
 
 variable "admin_password" {
-  default = "123456abcdef" 
+  default = "123456abcDEF." 
 }
 
 variable "active_directory_domain" {
