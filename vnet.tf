@@ -1,11 +1,11 @@
 
 
 resource "azurerm_virtual_network" "main" {
-  count    = var.vnet_config.create_vnet ? 1 : 0
+  count               = var.vnet_config.create_vnet ? 1 : 0
   name                = "VNet_${var.vnet_config.name}"
-  address_space       = "${var.vnet_config.address_space}"
-  location            = "${local.rglocation}"
-  resource_group_name = "${local.rgname}"
+  address_space       = var.vnet_config.address_space
+  location            = local.rglocation
+  resource_group_name = local.rgname
   dns_servers         = var.vnet_config.dns_servers
   depends_on = [
     azurerm_resource_group.main,
@@ -13,12 +13,12 @@ resource "azurerm_virtual_network" "main" {
 }
 
 resource "azurerm_subnet" "main" {
-  for_each = { for each in var.subnets_config : each.name => each }
-  name                                           = "${each.value.name}"
-  address_prefixes                               = "${each.value.address_prefixes}"
+  for_each         = { for each in var.subnets_config : each.name => each }
+  name             = each.value.name
+  address_prefixes = each.value.address_prefixes
   #enforce_private_link_endpoint_network_policies = true
-  resource_group_name                            = azurerm_virtual_network.main[0].resource_group_name
-  virtual_network_name                           = azurerm_virtual_network.main[0].name
+  resource_group_name  = local.rgname
+  virtual_network_name = azurerm_virtual_network.main[0].name
 
   depends_on = [
     azurerm_virtual_network.main,

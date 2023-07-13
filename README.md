@@ -6,15 +6,40 @@ Modulo para crear una VM con AD DC
 
 ```
 module "addc" {
-  source = "github.com/soysoliscarlos/terraform-azurerm-ADDC.git?ref=0.0.1"
+  source  = "github.com/soysoliscarlos/terraform-azurerm-ADDC.git"
+  version = "~>0.0.1"
 }
 ```
+## Default values
+### VM Credentials
+- username = "azureadmin"
+- password = "123456abcDEF."
 
-# Crear -Grupo de Recursos, Virtual Network y AD DC con valores pesonalizados
+### AD DC INFORMATION
+- active_directory_domain = "addc.local"
+- active_directory_netbios_name = "addc"
+### Resource Group
+- name = "RG_01"
+- location = "eastus2"
+
+### Virtual Network
+- name = "VNet_01"
+- dns_servers = ["192.168.0.4"]
+- address_space = ["192.168.0.0/24"]
+#### Subnet
+- name = "default"
+- address_prefixes = ["192.168.0.0/24"]
+
+### Virtual Machine
+- name = "VM_01"
+- subnet = "default"
+- private_ip_address = "192.168.0.4"
+
+# Crear Grupo de Recursos, Virtual Network y AD DC con valores pesonalizados
 
 ```
 module "addc" {
-  source = "github.com/soysoliscarlos/terraform-azurerm-ADDC.git?ref=0.0.1"
+  source = "github.com/soysoliscarlos/terraform-azurerm-ADDC.git?ref=0.0.2"
   # Crear Grupo de recursos
   rg_config = {
     create_rg = true
@@ -26,7 +51,7 @@ module "addc" {
   {
       create_vnet = true
       name = "TEST"
-      dns_servers = []
+      dns_servers = ["192.168.0.4"]
       address_space = ["192.168.0.0/24"]
     }
   # Crear Subnet
@@ -36,6 +61,25 @@ module "addc" {
         address_prefixes = ["192.168.0.0/24"]
     } 
   ]
+  # Crear Máquina virtual
+  vm_config = {
+    create_vm = false
+    name = "01"
+    subnet = "default"
+    private_ip_address = "192.168.0.4"
+  }
 
+  "admin_username" = "azureadmin"
+  "admin_password" = "123456abcDEF." 
+  "active_directory_domain" = "addc.local"
+  "active_directory_netbios_name" = "addc"
+}
+```
+
+# Output content
+To know what is the public IP
+```
+output "Public-IP" {
+  value = "${module.addc.publicip}"
 }
 ```
