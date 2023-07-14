@@ -9,6 +9,7 @@ resource "azurerm_virtual_network" "main" {
   dns_servers         = var.vnet_config.dns_servers
   depends_on = [
     azurerm_resource_group.main,
+    azurerm_network_security_group.main
   ]
 }
 
@@ -22,6 +23,7 @@ resource "azurerm_subnet" "main" {
 
   depends_on = [
     azurerm_virtual_network.main,
+    azurerm_network_security_group.main
   ]
 }
 
