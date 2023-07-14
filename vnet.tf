@@ -24,3 +24,25 @@ resource "azurerm_subnet" "main" {
     azurerm_virtual_network.main,
   ]
 }
+
+data "http" "myip" {
+  url = "http://ipv4.icanhazip.com"
+}
+
+resource "azurerm_network_security_group" "main" {
+  name                = "NSG_01"
+  location            = local.rglocation
+  resource_group_name = local.rgname
+
+  security_rule {
+    name                       = "AllowRDPInbound"
+    priority                   = 100
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "3389"
+    source_address_prefix      = "${chomp(data.http.myip.response_body)}"
+    destination_address_prefix = "*"
+  }
+}
