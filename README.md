@@ -1,6 +1,6 @@
 # terraform-azurerm-ADDC
 
-Modulo para crear una VM con AD DC
+Module to create a VM with Active Directory Domain Controller (AD DC)
 
 ## Create Resource Group, Virtual Network and VM AD DC with default vaules
 
