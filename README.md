@@ -2,51 +2,51 @@
 
 Modulo para crear una VM con AD DC
 
-# Crear Grupo de Recursos, Virtual Network y AD DC con valores por defecto
+## Create Resource Group, Virtual Network and VM AD DC with default vaules
 
-```
+```terraform
 module "addc" {
   source  = "github.com/soysoliscarlos/terraform-azurerm-ADDC.git?ref=0.0.2""
 }
 ```
 
-## Default values
+### Default values
 
-### VM Credentials
+#### VM Credentials
 
 - username = "azureadmin"
 - password = "123456abcDEF."
 
-### AD DC INFORMATION
+#### AD DC INFORMATION
 
 - active_directory_domain = "addc.local"
 - active_directory_netbios_name = "addc"
 
-### Resource Group
+#### Resource Group
 
 - name = "RG_01"
 - location = "eastus2"
 
-### Virtual Network
+#### Virtual Network
 
 - name = "VNet_01"
 - dns_servers = ["192.168.0.4"]
 - address_space = ["192.168.0.0/24"]
 
-#### Subnet
+##### Subnet
 
 - name = "default"
 - address_prefixes = ["192.168.0.0/24"]
 
-### Virtual Machine
+#### Virtual Machine
 
 - name = "VM_01"
 - subnet = "default"
 - private_ip_address = "192.168.0.4"
 
-# Crear Grupo de Recursos, Virtual Network y AD DC con valores pesonalizados
+## Crear Grupo de Recursos, Virtual Network y AD DC con valores pesonalizados
 
-```
+```terraform
 module "addc" {
   source = "github.com/soysoliscarlos/terraform-azurerm-ADDC.git?ref=0.0.2"
   # Crear Grupo de recursos
@@ -85,11 +85,11 @@ module "addc" {
 }
 ```
 
-# Output content
+## Output content
 
 To know what is the public IP
 
-```
+```terraform
 output "Public-IP" {
   value = "${module.addc.publicip}"
 }
