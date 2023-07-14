@@ -6,7 +6,7 @@ Modulo para crear una VM con AD DC
 
 ```
 module "addc" {
-  source  = "github.com/soysoliscarlos/terraform-azurerm-ADDC.git?ref=0.0.1""
+  source  = "github.com/soysoliscarlos/terraform-azurerm-ADDC.git?ref=0.0.2""
 }
 ```
 
@@ -48,7 +48,7 @@ module "addc" {
 
 ```
 module "addc" {
-  source = "github.com/soysoliscarlos/terraform-azurerm-ADDC.git?ref=0.0.1"
+  source = "github.com/soysoliscarlos/terraform-azurerm-ADDC.git?ref=0.0.2"
   # Crear Grupo de recursos
   rg_config = {
     create_rg = true
