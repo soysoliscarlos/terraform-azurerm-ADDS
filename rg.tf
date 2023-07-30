@@ -1,5 +1,5 @@
 resource "azurerm_resource_group" "main" {
-  count    = var.rg_config.create_rg ? 1 : 0
-  name     = "RG_${var.rg_config.name}"
-  location = var.rg_config.location
+  count    = var.use_custom_rg ? 0 : 1
+  name     = "RG_${var.rg_name}"
+  location = var.location
 }

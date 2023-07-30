@@ -18,30 +18,20 @@ variable "active_directory_netbios_name" {
 
 #RG
 ## Crear RG
-variable "rg_config" {
-  type = object({
-    create_rg = bool
-    name      = string
-    location  = string
-  })
-  default = {
-    create_rg = true
-    name      = "01"
-    location  = "eastus2"
-  }
+variable "use_custom_rg" {
+  type = bool
+  default = false
 }
-
-##Si ya existe el RG, debe definirlo
-variable "resource_group_name" {
-  type        = string
-  description = "Define Resource group name in case does not create a resource group"
-  default     = "01"
+variable "rg_name" {
+  type =  string
+  default = "addc"
 }
-
-variable "resource_group_location" {
-  type        = string
-  description = "Define location in case does not create a resource group"
-  default     = "eastus2"
+variable "location" {
+  type =  string
+  default = "eastus2"
+}
+variable "rg_data" {
+  default = null
 }
 
 #VNET
