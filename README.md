@@ -2,11 +2,13 @@
 
 Terraform module to create a VM in Azure with Active Directory Domain Controller (AD DC)
 
+NOTE: For now this terraform module should be used only for development environments. DO NOT USE FOR PRODUCTION ENVIRONMENTS
+
 ## Create Resource Group, Virtual Network and VM AD DC with default vaules
 
 ```terraform
 module "addc" {
-  source  = "github.com/soysoliscarlos/terraform-azurerm-ADDC.git"
+  source    = "github.com/soysoliscarlos/terraform-azurerm-ADDC.git"
 }
 ```
 
@@ -24,7 +26,7 @@ module "addc" {
 
 #### Resource Group
 
-- name = "RG_01"
+- name = "RG_addc"
 - location = "eastus2"
 
 #### Virtual Network
@@ -44,18 +46,16 @@ module "addc" {
 - subnet = "default"
 - private_ip_address = "192.168.0.4"
 
-## Crear Grupo de Recursos, Virtual Network y AD DC con valores pesonalizados
+## Create Resource Group, Virtual Network, and AD DC with Pesonalized values
 
 ```terraform
 module "addc" {
   source = "github.com/soysoliscarlos/terraform-azurerm-ADDC.git"
-  # Crear Grupo de recursos
-  rg_config = {
-    create_rg = true
-    location  = "eastus2"
-    name      = "TEST"
-  }
-  # Crear Virtual Network
+  # Create CustomResource Group
+  use_custom_rg = true
+  rg_name = "addc" # with the prefix "RG_" the final name will be prefix ´variable name; ex "RG_addc"
+  rg_location = "eastus2"
+  # Create Virtual Network
   vnet_config =
   {
       create_vnet = true
@@ -70,9 +70,9 @@ module "addc" {
         address_prefixes = ["192.168.0.0/24"]
     } 
   ]
-  # Crear Máquina virtual
+  # Create Virtual Machine
   vm_config = {
-    create_vm = false
+    create_vm = true
     name = "01"
     subnet = "default"
     private_ip_address = "192.168.0.4"
@@ -87,7 +87,7 @@ module "addc" {
 
 ## Output content
 
-To know what is the public IP
+To know what is the public IP, add the follow block:
 
 ```terraform
 output "Public-IP" {
