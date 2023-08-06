@@ -7,7 +7,6 @@ resource "azurerm_public_ip" "main" {
   #availability_zone   = "No-Zone"
   allocation_method = "Static"
   sku               = "Standard"
-  
 }
 
 resource "azurerm_network_interface" "main" {
@@ -24,7 +23,6 @@ resource "azurerm_network_interface" "main" {
     public_ip_address_id          = azurerm_public_ip.main.id
     private_ip_address_allocation = "Static"
     private_ip_address            = var.vm_config.private_ip_address
-
   }
 }
 
@@ -77,5 +75,4 @@ resource "azurerm_virtual_machine_extension" "adforest" {
         "commandToExecute": "powershell.exe -Command \"${local.powershell_ad_command}\""
     }
   SETTINGS
-
 }

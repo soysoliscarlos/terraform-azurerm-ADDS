@@ -1,5 +1,3 @@
-
-
 variable "admin_username" {
   default = "azureadmin"
 }
@@ -19,15 +17,15 @@ variable "active_directory_netbios_name" {
 #RG
 ## Crear RG
 variable "use_custom_rg" {
-  type = bool
+  type    = bool
   default = false
 }
 variable "rg_name" {
-  type =  string
+  type    = string
   default = "addc"
 }
 variable "location" {
-  type =  string
+  type    = string
   default = "eastus2"
 }
 variable "rg_data" {
@@ -59,6 +57,17 @@ variable "subnets_config" {
     name             = "default"
     address_prefixes = ["192.168.0.0/24"]
   }]
+}
+
+# NSG
+variable "use_custom_nsg" {
+  type    = bool
+  default = false
+}
+
+variable "nsg_name" {
+  type    = string
+  default = "addc"
 }
 
 # Máquina virtual

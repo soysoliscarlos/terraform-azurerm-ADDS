@@ -3,7 +3,8 @@ data "http" "myip" {
 }
 
 resource "azurerm_network_security_group" "main" {
-  name                = "NSG_01"
+  count               = var.use_custom_nsg ? 0 : 1
+  name                = "NSG_${var.nsg_name}"
   location            = local.rglocation
   resource_group_name = local.rgname
 
@@ -15,7 +16,7 @@ resource "azurerm_network_security_group" "main" {
     protocol                   = "Tcp"
     source_port_range          = "*"
     destination_port_range     = "3389"
-    source_address_prefix      = "${chomp(data.http.myip.response_body)}"
+    source_address_prefix      = chomp(data.http.myip.response_body)
     destination_address_prefix = "*"
   }
 }
@@ -49,5 +50,5 @@ resource "azurerm_subnet" "main" {
 
 resource "azurerm_subnet_network_security_group_association" "nsg_subnet-default" {
   subnet_id                 = azurerm_subnet.main["default"].id
-  network_security_group_id = azurerm_network_security_group.main.id
+  network_security_group_id = azurerm_network_security_group.main[0].id
 }
