@@ -4,7 +4,7 @@ data "http" "myip" {
 
 resource "azurerm_network_security_group" "main" {
   count               = var.use_custom_nsg ? 0 : 1
-  name                = "NSG_${var.nsg_name}"
+  name                = var.use_custom_resource_prefix_name ? "${var.nsg_name}" : "NSG_${var.nsg_name}"
   location            = local.rglocation
   resource_group_name = local.rgname
 
@@ -23,7 +23,7 @@ resource "azurerm_network_security_group" "main" {
 
 resource "azurerm_virtual_network" "main" {
   count               = var.vnet_config.create_vnet ? 1 : 0
-  name                = "VNet_${var.vnet_config.name}"
+  name                = var.use_custom_resource_prefix_name ? "${var.vnet_config.name}" : "VNet_${var.vnet_config.name}"
   address_space       = var.vnet_config.address_space
   location            = local.rglocation
   resource_group_name = local.rgname

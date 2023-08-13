@@ -42,7 +42,7 @@ variable "vnet_config" {
   })
   default = {
     create_vnet   = true
-    name          = "01"
+    name          = "addc"
     dns_servers   = ["192.168.0.4"]
     address_space = ["192.168.0.0/24"]
   }
@@ -80,7 +80,7 @@ variable "vm_config" {
   })
   default = {
     create_vm          = true
-    name               = "01"
+    name               = "addc"
     subnet             = "default"
     private_ip_address = "192.168.0.4"
   }
@@ -89,5 +89,11 @@ variable "vm_config" {
 variable "virtual_machine_name" {
   type        = string
   description = "vm name"
-  default     = "01"
+  default     = "addc"
+}
+
+# Prefix value
+variable "use_custom_resource_prefix_name" {
+  type    = bool
+  default = false
 }
