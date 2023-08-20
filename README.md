@@ -79,7 +79,7 @@ module "addc" {
 }
 ```
 
-## Create rg_data = data.azurerm_resource_group.rg
+## Create Resource Group, Virtual Network and VM AD DC with personalize vaules
 
 ```terraform
 module "addc" {
