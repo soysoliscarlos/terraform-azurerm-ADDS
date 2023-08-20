@@ -79,7 +79,7 @@ module "addc" {
 }
 ```
 
-## Create Resource Group, Virtual Network and VM AD DC with personalize vaules
+## Create Resource Group, Virtual Network and VM AD DC with custom vaules
 
 ```terraform
 module "addc" {
