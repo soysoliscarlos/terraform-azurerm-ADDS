@@ -1,7 +1,7 @@
 
 ## Domain Controller 
 resource "azurerm_public_ip" "main" {
-  name                = var.use_custom_resource_prefix_name ? "${var.vm_config.name}" : "PIP-${var.vm_config.name}" 
+  name                = var.use_custom_resource_prefix_name ? "${var.vm_config.name}" : "PIP_${var.vm_config.name}" 
   resource_group_name = local.rgname
   location            = local.rglocation
   #availability_zone   = "No-Zone"
@@ -11,7 +11,7 @@ resource "azurerm_public_ip" "main" {
 
 resource "azurerm_network_interface" "main" {
   count                = var.vm_config.create_vm ? 1 : 0
-  name                 = var.use_custom_resource_prefix_name ? "${var.vm_config.name}" : "NIC-${var.vm_config.name}"
+  name                 = var.use_custom_resource_prefix_name ? "${var.vm_config.name}" : "NIC_${var.vm_config.name}"
   location             = local.rglocation
   resource_group_name  = local.rgname
   enable_ip_forwarding = true
@@ -33,7 +33,7 @@ data "azurerm_virtual_machine" "main" {
 }
 resource "azurerm_windows_virtual_machine" "main" {
   count                      = var.vm_config.create_vm ? 1 : 0
-  name                       = var.use_custom_resource_prefix_name ? "${var.vm_config.name}" : "VM-${var.vm_config.name}"
+  name                       = var.use_custom_resource_prefix_name ? "${var.vm_config.name}" : "VM_${var.vm_config.name}"
   resource_group_name        = local.rgname
   location                   = local.rglocation
   size                       = "Standard_A4_v2"
