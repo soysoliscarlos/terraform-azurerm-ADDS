@@ -1,5 +1,7 @@
 # terraform-azurerm-ADDC
 
+[_Click here to see Readme in Spanish_](/README-ES.md)
+
 Terraform module to create a VM in Azure with Active Directory Domain Controller (AD DC)
 
 NOTE: For now this terraform module should be used only for development environments. DO NOT USE FOR PRODUCTION ENVIRONMENTS
@@ -84,7 +86,7 @@ module "addc" {
 ```terraform
 module "addc" {
   source = "github.com/soysoliscarlos/terraform-azurerm-ADDC.git?ref=0.0.3"
-  # Create CustomResource Group
+  # Create Custom Resource Group
   use_custom_rg = true
   rg_name = "addc" # with the prefix "RG_" the final name will be prefix ´variable name; ex "RG_addc"
   rg_location = "eastus2"
