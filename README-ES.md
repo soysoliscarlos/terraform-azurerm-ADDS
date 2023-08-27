@@ -1,5 +1,7 @@
 # terraform-azurerm-ADDC
 
+[_Click here to see Readme in English_](/README.md)
+
 Módulo de Terraform para crear una máquina virtual en Azure con Controlador de Dominio de Active Directory (AD DC)
 
 NOTA: Por ahora este módulo de terraform solo debe usarse para entornos de desarrollo. NO LO USE PARA ENTORNOS DE PRODUCCIÓN
