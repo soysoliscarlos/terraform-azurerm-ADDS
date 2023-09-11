@@ -1,6 +1,6 @@
 # terraform-azurerm-ADDC
 
-[_Click here to see Readme in Spanish_](/README-ES.md)
+[_Click here to see Readme in Spanish_](https://github.com/soysoliscarlos/terraform-azurerm-ADDC/blob/main/README-ES.md)
 
 Terraform module to create a VM in Azure with Active Directory Domain Controller (AD DC)
 
