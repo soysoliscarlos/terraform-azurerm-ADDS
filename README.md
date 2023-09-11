@@ -10,7 +10,8 @@ NOTE: For now this terraform module should be used only for development environm
 
 ```terraform
 module "addc" {
-  source    = "github.com/soysoliscarlos/terraform-azurerm-ADDC.git?ref=v0.0.3"
+  source  = "soysoliscarlos/ADDC/azurerm"
+  version = "0.0.4"
 }
 ```
 
@@ -58,7 +59,8 @@ module "addc" {
 
 ```terraform
 module "addc" {
-  source = "github.com/soysoliscarlos/terraform-azurerm-ADDC.git?ref=v0.0.3"
+  source  = "soysoliscarlos/ADDC/azurerm"
+  version = "0.0.4"
   # Create CustomResource Group
   use_custom_rg = true
   rg_name = "addc" # with the prefix "RG_" the final name will be prefix ´variable name; ex "RG_addc"
@@ -74,7 +76,8 @@ data "azurerm_resource_group" "default" {
 }
 
 module "addc" {
-  source = "github.com/soysoliscarlos/terraform-azurerm-ADDC.git?ref=v0.0.3"
+    source  = "soysoliscarlos/ADDC/azurerm"
+  version = "0.0.4"
   # Create CustomResource Group
   use_custom_rg = true
   rg_data = data.azurerm_resource_group.rg
@@ -85,7 +88,8 @@ module "addc" {
 
 ```terraform
 module "addc" {
-  source = "github.com/soysoliscarlos/terraform-azurerm-ADDC.git?ref=v0.0.3"
+    source  = "soysoliscarlos/ADDC/azurerm"
+  version = "0.0.4"
   # Create Custom Resource Group
   use_custom_rg = true
   rg_name = "addc" # with the prefix "RG_" the final name will be prefix ´variable name; ex "RG_addc"
