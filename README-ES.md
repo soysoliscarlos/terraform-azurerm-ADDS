@@ -1,17 +1,17 @@
-# terraform-azurerm-ADDC
+# terraform-azurerm-ADDS
 
 [_Click here to see Readme in English_](/README.md)
 
-Módulo de Terraform para crear una máquina virtual en Azure con Controlador de Dominio de Active Directory (AD DC)
+Módulo de Terraform para crear una máquina virtual en Azure con Controlador de Dominio de Active Directory (AD DS)
 
 NOTA: Por ahora este módulo de terraform solo debe usarse para entornos de desarrollo. NO LO USE PARA ENTORNOS DE PRODUCCIÓN
 
 ## Crear grupo de recursos, red virtual y máquina virtual AD DC con valores predeterminados
 
 ```terraform
-module "addc" {
-  source  = "soysoliscarlos/ADDC/azurerm"
-  version = "0.0.15"
+module "ADDS" {
+  source  = "soysoliscarlos/ADDS/azurerm"
+  version = "0.0.16"
 }
 ```
 
@@ -24,12 +24,12 @@ module "addc" {
 
 #### INFORMACIÓN DEL AD DC
 
-- active_directory_domain = "addc.local"
-- active_directory_netbios_name = "addc"
+- active_directory_domain = "ADDS.local"
+- active_directory_netbios_name = "ADDS"
 
 #### Grupo de recursos
 
-- name = "RG_addc"
+- name = "RG_ADDS"
 - location = "eastus2"
 
 #### Red virtual
@@ -45,7 +45,7 @@ module "addc" {
 
 ##### Grupo de seguridad de red
 
-- name = "NSG_addc"
+- name = "NSG_ADDS"
 
 #### Máquina virtual
 
@@ -58,12 +58,12 @@ module "addc" {
 ### Crear grupo de recursos personalizado
 
 ```terraform
-module "addc" {
-  source  = "soysoliscarlos/ADDC/azurerm"
-  version = "0.0.15"
+module "ADDS" {
+  source  = "soysoliscarlos/ADDS/azurerm"
+  version = "0.0.16"
   # Create CustomResource Group
   use_custom_rg = true
-  rg_name = "addc" # El nombre final será el prefijo + Nombre de la varible ; ej "RG_addc"
+  rg_name = "ADDS" # El nombre final será el prefijo + Nombre de la varible ; ej "RG_ADDS"
   rg_location = "eastus2"
 }
 ```
@@ -72,12 +72,12 @@ module "addc" {
 
 ```terraform
 data "azurerm_resource_group" "default" {
-  name = "RG_addc"
+  name = "RG_ADDS"
 }
 
-module "addc" {
-  source  = "soysoliscarlos/ADDC/azurerm"
-  version = "0.0.15"
+module "ADDS" {
+  source  = "soysoliscarlos/ADDS/azurerm"
+  version = "0.0.16"
   # Create CustomResource Group
   use_custom_rg = true
   rg_data = data.azurerm_resource_group.rg
@@ -87,12 +87,12 @@ module "addc" {
 ## Crear grupo de recursos, red virtual y máquina virtual AD DC con valores personalizados
 
 ```terraform
-module "addc" {
-    source  = "soysoliscarlos/ADDC/azurerm"
-  version = "0.0.15"
+module "ADDS" {
+    source  = "soysoliscarlos/ADDS/azurerm"
+  version = "0.0.16"
   # Crear grupo de recursos personalizado
   use_custom_rg = true
-  rg_name = "addc" # El nombre final será el prefijo + Nombre de la varible ; ej "RG_addc"
+  rg_name = "ADDS" # El nombre final será el prefijo + Nombre de la varible ; ej "RG_ADDS"
   rg_location = "eastus2"
   # Crear red virtual
   vnet_config =
@@ -110,7 +110,7 @@ module "addc" {
     } 
   ]
   # Grupo de seguridad de red
-  nsg_name = "addc"
+  nsg_name = "ADDS"
 
   # Crear máquina virtual
   vm_config = {
@@ -122,8 +122,8 @@ module "addc" {
 
   "admin_username" = "azureadmin"
   "admin_password" = "123456abcDEF." 
-  "active_directory_domain" = "addc.local"
-  "active_directory_netbios_name" = "addc"
+  "active_directory_domain" = "ADDS.local"
+  "active_directory_netbios_name" = "ADDS"
 }
 ```
 
@@ -152,6 +152,6 @@ Para saber cuál es la IP pública de la máquina virtual, añade el siguiente b
 
 ```terraform
 output "Public-IP" {
-  value = "${module.addc.publicip}"
+  value = "${module.ADDS.publicip}"
 }
 ```
