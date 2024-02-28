@@ -11,7 +11,7 @@ NOTE: For now this terraform module should be used only for development environm
 ```terraform
 module "ADDS" {
   source  = "soysoliscarlos/ADDS/azurerm"
-  version = "0.0.18"
+  version = "0.0.19"
 }
 ```
 
@@ -60,7 +60,7 @@ module "ADDS" {
 ```terraform
 module "ADDS" {
   source  = "soysoliscarlos/ADDS/azurerm"
-  version = "0.0.18"
+  version = "0.0.19"
   # Create CustomResource Group
   use_custom_rg = true
   rg_name = "ADDS" # with the prefix "RG_" the final name will be prefix ´variable name; ex "RG_ADDS"
@@ -77,7 +77,7 @@ data "azurerm_resource_group" "default" {
 
 module "ADDS" {
     source  = "soysoliscarlos/ADDS/azurerm"
-  version = "0.0.18"
+  version = "0.0.19"
   # Create CustomResource Group
   use_custom_rg = true
   rg_data = data.azurerm_resource_group.rg
@@ -89,7 +89,7 @@ module "ADDS" {
 ```terraform
 module "ADDS" {
     source  = "soysoliscarlos/ADDS/azurerm"
-  version = "0.0.18"
+  version = "0.0.19"
   # Create Custom Resource Group
   use_custom_rg = true
   rg_name = "ADDS" # with the prefix "RG_" the final name will be prefix ´variable name; ex "RG_ADDS"
