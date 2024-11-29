@@ -1,7 +1,7 @@
 
 ## Domain Controller 
 resource "azurerm_public_ip" "main" {
-  name                = var.use_custom_resource_prefix_name ? "${var.vm_config.name}" : "PIP_${var.vm_config.name}" 
+  name                = var.use_custom_resource_prefix_name ? "${var.vm_config.name}" : "PIP_${var.vm_config.name}"
   resource_group_name = local.rgname
   location            = local.rglocation
   #availability_zone   = "No-Zone"
@@ -33,7 +33,8 @@ data "azurerm_virtual_machine" "main" {
 }
 resource "azurerm_windows_virtual_machine" "main" {
   count                      = var.vm_config.create_vm ? 1 : 0
-  name                       = var.use_custom_resource_prefix_name ? "${var.vm_config.name}" : "VM_${var.vm_config.name}"
+  name                       = var.use_custom_resource_prefix_name ? "${var.vm_config.name}" : "VM-${var.vm_config.name}"
+  computer_name              = var.vm_config.name
   resource_group_name        = local.rgname
   location                   = local.rglocation
   size                       = "Standard_A4_v2"
