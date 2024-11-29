@@ -10,11 +10,10 @@ resource "azurerm_public_ip" "main" {
 }
 
 resource "azurerm_network_interface" "main" {
-  count                = var.vm_config.create_vm ? 1 : 0
-  name                 = var.use_custom_resource_prefix_name ? "${var.vm_config.name}" : "NIC_${var.vm_config.name}"
-  location             = local.rglocation
-  resource_group_name  = local.rgname
-  enable_ip_forwarding = true
+  count               = var.vm_config.create_vm ? 1 : 0
+  name                = var.use_custom_resource_prefix_name ? "${var.vm_config.name}" : "NIC_${var.vm_config.name}"
+  location            = local.rglocation
+  resource_group_name = local.rgname
   #enable_accelerated_networking = trueyes
 
   ip_configuration {
